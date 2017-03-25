@@ -175,7 +175,7 @@ static const size_t kRtmpSignatureSize = 1536;
     self.rtmpStatus = LLYRtmpSessionStatusHandshake0;
     
     //c0
-    char c0Byte = 0x03;
+    char c0Byte = 0x03;//rtmp版本号
     NSData *c0 = [NSData dataWithBytes:&c0Byte length:1];
     [self writeData:c0];
     
@@ -282,7 +282,7 @@ static const size_t kRtmpSignatureSize = 1536;
         
         if (preTimestamp == nil) {//第一帧,音频或者视频
             chunk = malloc(12);
-            chunk[0] = RTMP_CHUNK_TYPE_0/*0x00*/ | (streamId & 0x1F); //前两个字节 00 表示12字节
+            chunk[0] = RTMP_CHUNK_TYPE_0/*0x00*/ | (streamId & 0x1F); //前两个字节 00 表示12字节(basic header 1字节，messageheader 11字节)
             offset += 1;
             
             memcpy(chunk+offset, [NSMutableData be24:(uint32_t)ts], 3);
@@ -300,7 +300,7 @@ static const size_t kRtmpSignatureSize = 1536;
             
         }else{//不是第一帧
             chunk = malloc(8);
-            chunk[0] = RTMP_CHUNK_TYPE_1/*0x40*/ | (streamId & 0x1F);//前两个字节01表示8字节
+            chunk[0] = RTMP_CHUNK_TYPE_1/*0x40*/ | (streamId & 0x1F);//前两个字节01表示8字节(basic header 1字节，messageheader 7字节)
             offset += 1;
             
             char *temp = [NSMutableData be24:(uint32_t)(ts - preTimestamp.integerValue)];
@@ -582,6 +582,7 @@ static const size_t kRtmpSignatureSize = 1536;
     
     NSString *trackedCommand = self.trackedCommands[@(pktId)] ;
     
+    //"_result"是控制消息的回应消息
     if ([command isEqualToString:@"_result"]) {
         NSLog(@"tracked command: %@\n", trackedCommand);
         if ([trackedCommand isEqualToString:@"connect"]) {
