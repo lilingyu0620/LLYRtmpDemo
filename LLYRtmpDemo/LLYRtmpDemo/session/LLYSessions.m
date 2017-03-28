@@ -98,7 +98,7 @@
     if (!_rtmpSession) {
         _rtmpSession = [[LLYRtmpSession alloc]init];
         _rtmpSession.delegate = self;
-        
+        _rtmpSession.currentActor = self.currentActor;
         LLYRtmpConfig *config = [[LLYRtmpConfig alloc] init];
         config.url = self.url;
         config.width = self.videoSession.videoConfig.videoSize.width;
@@ -161,6 +161,13 @@
             [self endSession];
         }
             break;
+            
+        case LLYRtmpSessionStatusSessionStartPlay:
+        {
+            
+            
+        }
+            break;
         default:
             break;
     }
@@ -201,6 +208,13 @@
     }
     if (_rtmpSession) {
         [_rtmpSession sendBuffer:frame];
+    }
+}
+
+- (void)rtmpSession:(LLYRtmpSession *)rtmpSession receiveVideoData:(uint8_t *)data{
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sessions:receiveVideoData:)]) {
+        [self.delegate sessions:self receiveVideoData:data];
     }
 }
 @end

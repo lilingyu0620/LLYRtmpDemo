@@ -45,7 +45,8 @@ typedef NS_ENUM(NSUInteger, LLYStreamID) {
     LLYStreamIDPing   = 0x02,//Ping 和ByteRead通道
     LLYStreamIDInvoke = 0x03,//invoke通道,connect,publish,connect
     LLYStreamIDAudio  = 0x04,//audio or video,这里只作为音频数据
-    LLYStreamIDVideo  = 0x06 //video //官方文档保留,实际可以发送视音频数据
+    LLYStreamIDVideo  = 0x06, //video //官方文档保留,实际可以发送视音频数据
+    LLYStreamIDPlay = 0x08 // 播放
 };
 
 typedef NS_ENUM(NSUInteger, LLYMSGTypeID) {
@@ -111,6 +112,5 @@ typedef NS_ENUM(NSUInteger,  FLV_FRAME) {
     FLV_FRAME_DISP_INTER = 3 << FLV_VIDEO_FRAMETYPE_OFFSET,
     
 };
-
 
 #endif /* LLYTypeHeader_h */

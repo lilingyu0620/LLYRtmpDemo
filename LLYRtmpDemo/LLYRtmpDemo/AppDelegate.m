@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "LLYAudienceVC.h"
+#import "LLYDirectorVC.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UIAlertViewDelegate>
 
 @end
 
@@ -17,9 +19,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请表明身份" delegate:self cancelButtonTitle:@"我要当主播" otherButtonTitles:@"我要当观众", nil];
+    [alertView show];
+
     return YES;
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (buttonIndex == 0) {
+        
+        LLYDirectorVC *directorVC = [[LLYDirectorVC alloc]init];
+        self.window.rootViewController = directorVC;
+        [self.window makeKeyAndVisible];
+        
+    }
+    else if (buttonIndex == 1) {
+        LLYAudienceVC *audienceVC = [[LLYAudienceVC alloc]init];
+        self.window.rootViewController = audienceVC;
+        [self.window makeKeyAndVisible];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

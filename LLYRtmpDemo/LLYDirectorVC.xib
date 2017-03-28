@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LLYDirectorVC">
+            <connections>
+                <outlet property="btn" destination="fAv-Ci-YBO" id="vBV-6X-JyB"/>
+                <outlet property="statusLabel" destination="WFY-md-yU4" id="qia-Vf-VbR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未连接" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFY-md-yU4">
+                    <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                    <color key="backgroundColor" red="1" green="0.32395891519999997" blue="0.26351332830000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="vg9-Sa-hWO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fAv-Ci-YBO">
+                    <rect key="frame" x="10" y="37" width="90" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="2qb-m2-7a2"/>
+                        <constraint firstAttribute="width" constant="90" id="Gfg-WM-L66"/>
+                    </constraints>
+                    <state key="normal" title="开始推流"/>
+                    <connections>
+                        <action selector="videoOrientation:" destination="-1" eventType="touchUpInside" id="qZx-al-h60"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="WFY-md-yU4" secondAttribute="trailing" id="Nhq-6d-kJi"/>
+                <constraint firstItem="WFY-md-yU4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SMe-we-Gby"/>
+                <constraint firstItem="fAv-Ci-YBO" firstAttribute="centerY" secondItem="WFY-md-yU4" secondAttribute="centerY" id="VtC-uB-EaU"/>
+                <constraint firstItem="fAv-Ci-YBO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Wek-af-yU9"/>
+                <constraint firstItem="WFY-md-yU4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="kfA-cn-93r"/>
+            </constraints>
+            <point key="canvasLocation" x="36.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

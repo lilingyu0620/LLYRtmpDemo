@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LLYVideoConfig.h"
 #import "LLYVideoSession.h"
-
+#import "LLYDemoHeader.h"
 
 /**
  *  连接状态
@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, LLYSessionState) {
 @protocol LLYSessionsDelegate <NSObject>
 
 - (void)sessions:(LLYSessions *)session statusDidChanged:(LLYSessionState)status;
+- (void)sessions:(LLYSessions *)session receiveVideoData:(uint8_t *)data;
 
 @end
 
@@ -42,6 +43,8 @@ typedef NS_ENUM(NSUInteger, LLYSessionState) {
 @property (nonatomic,strong) UIView *preView;
 
 @property (nonatomic,assign) LLYSessionState status;
+
+@property (nonatomic,assign) LLYCurrentActor currentActor;
 
 + (instancetype)defultSession;
 

@@ -20,50 +20,8 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLd-bF-4np">
-                                <rect key="frame" x="0.0" y="537" width="375" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.32395891519999997" blue="0.26351332830000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="827-an-gTB"/>
-                                    <constraint firstAttribute="width" constant="45" id="aiJ-ze-Boa"/>
-                                </constraints>
-                                <state key="normal" title="开始"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aiJ-ze-Boa"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="videoOrientation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jfa-Cs-2RM"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未连接" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTj-Gh-JOk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" red="1" green="0.32395891519999997" blue="0.26351332830000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="QLp-bR-eXC"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="sLd-bF-4np" secondAttribute="trailing" id="VXa-dY-z1Z"/>
-                            <constraint firstItem="wTj-Gh-JOk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VoY-Po-H2N"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sLd-bF-4np" secondAttribute="bottom" constant="100" id="YEA-RV-sem"/>
-                            <constraint firstAttribute="trailing" secondItem="wTj-Gh-JOk" secondAttribute="trailing" id="YEl-9c-o94"/>
-                            <constraint firstItem="sLd-bF-4np" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dQa-lv-VoJ"/>
-                            <constraint firstItem="sLd-bF-4np" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fUT-7I-lUq"/>
-                            <constraint firstItem="wTj-Gh-JOk" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qyO-KG-4bH"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="btn" destination="sLd-bF-4np" id="g8b-1h-meC"/>
-                        <outlet property="statusLabel" destination="wTj-Gh-JOk" id="pii-dp-9gH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,6 +7,7 @@
 //
 
 #import "LLYVideoOutputHandler.h"
+#import "GPUImage.h"
 
 @interface LLYVideoOutputHandler ()<AVCaptureVideoDataOutputSampleBufferDelegate>
 {

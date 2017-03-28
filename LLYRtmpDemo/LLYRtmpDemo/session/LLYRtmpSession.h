@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LLYFrame.h"
+#import "LLYDemoHeader.h"
 
 typedef NS_ENUM(NSUInteger, LLYRtmpSessionStatus){
     
@@ -24,13 +25,17 @@ typedef NS_ENUM(NSUInteger, LLYRtmpSessionStatus){
     LLYRtmpSessionStatusSessionStarted    = 8,
     
     LLYRtmpSessionStatusError             = 9,
-    LLYRtmpSessionStatusNotConnected      = 10
+    LLYRtmpSessionStatusNotConnected      = 10,
+    
+    LLYRtmpSessionStatusSessionStartPlay = 11
 };
 
 @class LLYRtmpSession;
 @protocol LLYRtmpSessionDelegate <NSObject>
 
 - (void)rtmpSession:(LLYRtmpSession *)rtmpSession didChangeStatus:(LLYRtmpSessionStatus)rtmpStatus;
+
+- (void)rtmpSession:(LLYRtmpSession *)rtmpSession receiveVideoData:(uint8_t *)data;
 
 @end
 
@@ -39,6 +44,7 @@ typedef NS_ENUM(NSUInteger, LLYRtmpSessionStatus){
 
 @property (nonatomic,copy) NSString *url;
 @property (nonatomic,strong) LLYRtmpConfig *config;
+@property (nonatomic,assign) LLYCurrentActor currentActor;
 
 @property (nonatomic,weak) id<LLYRtmpSessionDelegate> delegate;
 
