@@ -274,7 +274,7 @@ static const size_t kRtmpSignatureSize = 1536;
         uint64_t ts = frame.timestamp;
         
         int streamId = frame.msgStreamId;
-        NSLog(@"streamId------%d",streamId);
+        NSLog(@"llllllllllystreamId------%d",streamId);
         NSNumber *preTimestamp = self.preChunk[@(streamId)];
         
         uint8_t *chunk;
@@ -295,8 +295,8 @@ static const size_t kRtmpSignatureSize = 1536;
             memcpy(chunk+offset, &msgTypeId, 1);
             offset += 1;
             
-            memcpy(chunk+offset, (uint8_t *)&(_streamID), sizeof(_streamID));
-            offset += sizeof(_streamID);
+            memcpy(chunk+offset, (uint8_t *)&(streamId), sizeof(streamId));
+            offset += sizeof(streamId);
             
         }else{//不是第一帧
             chunk = malloc(8);
@@ -416,8 +416,7 @@ static const size_t kRtmpSignatureSize = 1536;
     
     uint8_t *buffer = (uint8_t *)data.bytes;
     NSUInteger total = data.length;
-    
-    while (total > 0) {
+    while (total > 0 && buffer != '\0') {
         int headType = (buffer[0] & 0xC0) >> 6;//取出前两个字节
         buffer++;
         total --;
@@ -431,11 +430,22 @@ static const size_t kRtmpSignatureSize = 1536;
                 RTMPChunk_0 chunk;
                 memcpy(&chunk, buffer, sizeof(RTMPChunk_0));
                 chunk.msg_length.data = [NSMutableData getByte24:(uint8_t *)&chunk.msg_length];
+                
                 buffer += sizeof(RTMPChunk_0);
                 total  -= sizeof(RTMPChunk_0);
-                BOOL isSuccess = [self handleMeesage:buffer :chunk.msg_type_id];
+                
+                BOOL isSuccess = [self handleMeesage:buffer type:chunk.msg_type_id length:chunk.msg_length.data];
                 if (!isSuccess) {
                     total = 0;break;
+                }
+                else{
+                    if (chunk.msg_type_id == LLYMSGTypeID_VIDEO) {
+                        uint8_t *naluData = (uint8_t *)malloc(chunk.msg_length.data);
+                        if (naluData != NULL) {
+                            memcpy(naluData, buffer, chunk.msg_length.data);
+                            [self handleVideoMessage:naluData length:chunk.msg_length.data];
+                        }
+                    }
                 }
                 
                 buffer += chunk.msg_length.data;
@@ -448,7 +458,7 @@ static const size_t kRtmpSignatureSize = 1536;
                 buffer += sizeof(RTMPChunk_1);
                 total  -= sizeof(RTMPChunk_1);
                 chunk.msg_length.data = [NSMutableData getByte24:(uint8_t *)&chunk.msg_length];
-                BOOL isSuccess = [self handleMeesage:buffer :chunk.msg_type_id];
+                BOOL isSuccess = [self handleMeesage:buffer type:chunk.msg_type_id length:chunk.msg_length.data];
                 if (!isSuccess) {
                     total = 0;break;
                 }
@@ -477,7 +487,7 @@ static const size_t kRtmpSignatureSize = 1536;
     }
 }
 
-- (BOOL)handleMeesage:(uint8_t *)p :(uint8_t)msgTypeId{
+- (BOOL)handleMeesage:(uint8_t *)p type:(uint8_t)msgTypeId length:(int)length{
     BOOL handleSuccess = YES;
     switch(msgTypeId) {
         case LLYMSGTypeID_BYTES_READ:
@@ -522,13 +532,14 @@ static const size_t kRtmpSignatureSize = 1536;
         case LLYMSGTypeID_VIDEO:
         {
             NSLog(@"received video");
-            [self handleVideoMessage:p];
+
         }
             break;
             
         case LLYMSGTypeID_AUDIO:
         {
             NSLog(@"received audio");
+
         }
             break;
             
@@ -594,7 +605,7 @@ static const size_t kRtmpSignatureSize = 1536;
             }
             else if (self.currentActor == LLYAudienceActor){
             
-                [self sendBufferLength];
+                [self sendSetBufferTime:0];//设定时间
                 [self sendCreateStream];
                 [self sendSubcribe];
             }
@@ -631,18 +642,17 @@ static const size_t kRtmpSignatureSize = 1536;
         else  if ([code isEqualToString:@"NetStream.Play.Start"]) {
             
             //重新设定了chunksize大小
-            [self sendSetChunkSize:getpagesize()];//16K
-            
-            //sendSetBufferTime(0);//设定时间
-            self.rtmpStatus = LLYRtmpSessionStatusSessionStartPlay;
+//            [self sendSetChunkSize:getpagesize()];//16K
+            [self sendSetBufferTime:0];//设定时间
+            self.rtmpStatus = LLYRtmpSessionStatusSessionStarted;
         }
     }
 }
 
-- (void)handleVideoMessage:(uint8_t *)p{
+- (void)handleVideoMessage:(uint8_t *)data length:(int)length{
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(rtmpSession:receiveVideoData:)]) {
-        [self.delegate rtmpSession:self receiveVideoData:p];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rtmpSession:receiveVideoData:length:)]) {
+        [self.delegate rtmpSession:self receiveVideoData:data length:length];
     }
     
 }
@@ -824,6 +834,26 @@ static const size_t kRtmpSignatureSize = 1536;
     });
 }
 
+- (void)sendBufferLength:(int)length{
+
+    dispatch_sync(_packageQueue, ^{
+        int streamId = 0;
+        
+        NSMutableData *data = [NSMutableData data];
+        [data appendByte:2];
+        [data appendByte24:0];
+        [data appendByte24:10];
+        [data appendByte:LLYMSGTypeID_PING];
+        [data appendBytes:(uint8_t*)&streamId length:sizeof(int32_t)];
+        
+        [data appendByte16:3];
+        [data appendByte32:_streamID];
+        [data appendByte32:length];
+        
+        [self writeData:data];
+    });
+}
+
 
 - (void)sendPublish{
     RTMPChunk_0 metadata = {0};
@@ -927,21 +957,6 @@ static const size_t kRtmpSignatureSize = 1536;
 
 
 //观众
-//setBufferLength
-
-- (void)sendBufferLength{
-    
-    RTMPChunk_0 metadata = {0};
-    metadata.msg_stream_id = LLYStreamIDPing;
-    metadata.msg_type_id = LLYMSGTypeID_PING;
-    
-    NSMutableData *buff = [NSMutableData data];
-//    [buff appendByte:kAMFNumber];
-    metadata.msg_length.data = (int)buff.length;
-    
-    [self sendPacket:buff :metadata];
-}
-
 //CFSubscribe
 - (void)sendSubcribe{
     
@@ -975,7 +990,6 @@ static const size_t kRtmpSignatureSize = 1536;
     self.trackedCommands[@(_numOfInvokes)] = @"play";
     [buff appendByte:kAMFNull];
     [buff appendString:_url.playPath];
-//    [buff appendByte:kAMFNumber];
     
     metadata.msg_length.data = (int)buff.length;
     [self sendPacket:buff :metadata];

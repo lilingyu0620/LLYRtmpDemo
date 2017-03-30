@@ -18,6 +18,8 @@
 		0A46BA7C1E88C459004580D9 /* LLYDirectorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A46BA7A1E88C459004580D9 /* LLYDirectorVC.m */; };
 		0A46BA7D1E88C459004580D9 /* LLYDirectorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA7B1E88C459004580D9 /* LLYDirectorVC.xib */; };
 		0A46BA801E88C849004580D9 /* LYOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A46BA7F1E88C849004580D9 /* LYOpenGLView.m */; };
+		0A46BA871E8C90E2004580D9 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA851E8C90E2004580D9 /* Shader.fsh */; };
+		0A46BA881E8C90E2004580D9 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA861E8C90E2004580D9 /* Shader.vsh */; };
 		0A5525F31E6E65CA008C709F /* NSMutableData+Buffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5525F21E6E65CA008C709F /* NSMutableData+Buffer.m */; };
 		0A5525F61E6E6733008C709F /* NSString+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5525F51E6E6733008C709F /* NSString+Url.m */; };
 		0A5525FF1E6EA764008C709F /* LLYRtmpConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5525FE1E6EA764008C709F /* LLYRtmpConfig.m */; };
@@ -98,6 +100,8 @@
 		0A46BA7F1E88C849004580D9 /* LYOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYOpenGLView.m; sourceTree = "<group>"; };
 		0A46BA821E88E702004580D9 /* LLYPCHHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYPCHHeader.pch; path = LLYRtmpDemo/LLYPCHHeader.pch; sourceTree = "<group>"; };
 		0A46BA831E88E7EB004580D9 /* LLYDemoHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLYDemoHeader.h; sourceTree = "<group>"; };
+		0A46BA851E8C90E2004580D9 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		0A46BA861E8C90E2004580D9 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		0A5525F11E6E65CA008C709F /* NSMutableData+Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+Buffer.h"; sourceTree = "<group>"; };
 		0A5525F21E6E65CA008C709F /* NSMutableData+Buffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+Buffer.m"; sourceTree = "<group>"; };
 		0A5525F41E6E6733008C709F /* NSString+Url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Url.h"; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 		0A6171211E666B3100A61D99 /* LLYRtmpDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0A46BA851E8C90E2004580D9 /* Shader.fsh */,
+				0A46BA861E8C90E2004580D9 /* Shader.vsh */,
 				0A5525F01E6E6597008C709F /* category */,
 				0A61717E1E680CD400A61D99 /* package */,
 				0A6171741E66A2E900A61D99 /* session */,
@@ -492,6 +498,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A46BA871E8C90E2004580D9 /* Shader.fsh in Resources */,
+				0A46BA881E8C90E2004580D9 /* Shader.vsh in Resources */,
 				0A6171321E666B3100A61D99 /* LaunchScreen.storyboard in Resources */,
 				0A61712F1E666B3100A61D99 /* Assets.xcassets in Resources */,
 				0A46BA7D1E88C459004580D9 /* LLYDirectorVC.xib in Resources */,
@@ -692,6 +700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PW2BL84NY9;
 				GCC_PREFIX_HEADER = LLYRtmpDemo/LLYPCHHeader.pch;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/GPUImage/framework/**";
@@ -713,6 +722,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PW2BL84NY9;
 				GCC_PREFIX_HEADER = LLYRtmpDemo/LLYPCHHeader.pch;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/GPUImage/framework/**";

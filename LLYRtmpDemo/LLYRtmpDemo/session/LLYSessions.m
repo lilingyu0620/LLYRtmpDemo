@@ -99,6 +99,7 @@
         _rtmpSession = [[LLYRtmpSession alloc]init];
         _rtmpSession.delegate = self;
         _rtmpSession.currentActor = self.currentActor;
+        
         LLYRtmpConfig *config = [[LLYRtmpConfig alloc] init];
         config.url = self.url;
         config.width = self.videoSession.videoConfig.videoSize.width;
@@ -106,6 +107,8 @@
         config.frameDuration = 1.0 / self.videoSession.videoConfig.fps;
         config.videoBitrate = self.videoSession.videoConfig.bitrate;
         _rtmpSession.config = config;
+        
+       
 //        config.audioSampleRate = self.audioConfig.sampleRate;
 //        config.stereo = self.audioConfig.channels == 2;
     }
@@ -164,7 +167,7 @@
             
         case LLYRtmpSessionStatusSessionStartPlay:
         {
-            
+//            _status = LLYSessionStateConnected;
             
         }
             break;
@@ -179,7 +182,7 @@
 
 - (void)videOutputHandler:(LLYVideoOutputHandler *)handler didOutputSampleBuffer:(CVPixelBufferRef)pixelBuffer{
 
-    if (!_sendable) {
+    if (!_sendable || self.currentActor == LLYAudienceActor) {
         return;
     }
     
@@ -188,14 +191,14 @@
 
 - (void)videoEncode:(LLYVideoEncode *)encode sps:(NSData *)sps pps:(NSData *)pps time:(uint64_t)time{
 
-    if (!_sendable) {
+    if (!_sendable || self.currentActor == LLYAudienceActor) {
         return;
     }
     [self.videoPackage packageKeyFrameSps:sps pps:pps timestamp:time];
 }
 - (void)videoEncode:(LLYVideoEncode *)encode frame:(NSData *)frame time:(uint64_t)time isKeyFrame:(BOOL)isKeyFrame{
 
-    if (!_sendable) {
+    if (!_sendable || self.currentActor == LLYAudienceActor) {
         return;
     }
     [self.videoPackage packageFrame:frame timestamp:time isKeyFrame:isKeyFrame];
@@ -203,7 +206,7 @@
 
 - (void)videoPackage:(LLYVideoPackager *)package didPacketFrame:(LLYFrame *)frame{
 
-    if (!_sendable) {
+    if (!_sendable || self.currentActor == LLYAudienceActor) {
         return;
     }
     if (_rtmpSession) {
@@ -211,10 +214,10 @@
     }
 }
 
-- (void)rtmpSession:(LLYRtmpSession *)rtmpSession receiveVideoData:(uint8_t *)data{
+- (void)rtmpSession:(LLYRtmpSession *)rtmpSession receiveVideoData:(uint8_t *)data length:(int)length{
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(sessions:receiveVideoData:)]) {
-        [self.delegate sessions:self receiveVideoData:data];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sessions:receiveVideoData:length:)]) {
+        [self.delegate sessions:self receiveVideoData:data length:length];
     }
 }
 @end

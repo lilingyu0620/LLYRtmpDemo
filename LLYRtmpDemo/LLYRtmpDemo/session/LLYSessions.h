@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, LLYSessionState) {
 @protocol LLYSessionsDelegate <NSObject>
 
 - (void)sessions:(LLYSessions *)session statusDidChanged:(LLYSessionState)status;
-- (void)sessions:(LLYSessions *)session receiveVideoData:(uint8_t *)data;
+- (void)sessions:(LLYSessions *)session receiveVideoData:(uint8_t *)data length:(int)length;
 
 @end
 

@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, LLYRtmpSessionStatus){
 
 - (void)rtmpSession:(LLYRtmpSession *)rtmpSession didChangeStatus:(LLYRtmpSessionStatus)rtmpStatus;
 
-- (void)rtmpSession:(LLYRtmpSession *)rtmpSession receiveVideoData:(uint8_t *)data;
+- (void)rtmpSession:(LLYRtmpSession *)rtmpSession receiveVideoData:(uint8_t *)data length:(int)length;
 
 @end
 
