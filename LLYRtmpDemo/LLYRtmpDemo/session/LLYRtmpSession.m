@@ -416,15 +416,19 @@ static const size_t kRtmpSignatureSize = 1536;
     
     uint8_t *buffer = (uint8_t *)data.bytes;
     NSUInteger total = data.length;
-    while (total > 0 && buffer != '\0') {
-        int headType = (buffer[0] & 0xC0) >> 6;//取出前两个字节
-        buffer++;
-        total --;
+    
+    int loopIndex = 0;
+    while (total > 0) {
+        loopIndex++;
         
+        total --;
         if (total <= 0) {
             break;
         }
-        
+        const uint8_t buf0 = buffer[0];
+        int headType = (buffer[0] & 0xC0) >> 6;//取出前两位
+        buffer++;
+
         switch (headType) {
             case RTMP_HEADER_TYPE_FULL:{
                 RTMPChunk_0 chunk;
@@ -437,15 +441,6 @@ static const size_t kRtmpSignatureSize = 1536;
                 BOOL isSuccess = [self handleMeesage:buffer type:chunk.msg_type_id length:chunk.msg_length.data];
                 if (!isSuccess) {
                     total = 0;break;
-                }
-                else{
-                    if (chunk.msg_type_id == LLYMSGTypeID_VIDEO) {
-                        uint8_t *naluData = (uint8_t *)malloc(chunk.msg_length.data);
-                        if (naluData != NULL) {
-                            memcpy(naluData, buffer, chunk.msg_length.data);
-                            [self handleVideoMessage:naluData length:chunk.msg_length.data];
-                        }
-                    }
                 }
                 
                 buffer += chunk.msg_length.data;
@@ -532,6 +527,11 @@ static const size_t kRtmpSignatureSize = 1536;
         case LLYMSGTypeID_VIDEO:
         {
             NSLog(@"received video");
+//            uint8_t *naluData = (uint8_t *)malloc(length);
+//            if (naluData != NULL) {
+//                memcpy(naluData, p,length);
+//            }
+            [self handleVideoMessage:p length:length];
 
         }
             break;

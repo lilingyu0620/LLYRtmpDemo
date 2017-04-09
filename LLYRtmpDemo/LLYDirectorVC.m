@@ -12,7 +12,7 @@
 #import "LLYVideoOutputHandler.h"
 #import "LLYSessions.h"
 
-#define RTMP_URL  @"rtmp://10.0.117.190/myapp/mystream" //@"rtmp://10.0.114.80:1935/myapp/llystream"
+#define RTMP_URL  @"rtmp://192.168.1.2/myapp/mystream" //@"rtmp://10.0.114.80:1935/myapp/llystream"
 
 
 @interface LLYDirectorVC ()<UIGestureRecognizerDelegate,LLYSessionsDelegate>{

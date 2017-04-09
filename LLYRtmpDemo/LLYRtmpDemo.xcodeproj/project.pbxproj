@@ -17,9 +17,9 @@
 		0A46BA761E88C2B0004580D9 /* LLYAudienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA741E88C2B0004580D9 /* LLYAudienceVC.xib */; };
 		0A46BA7C1E88C459004580D9 /* LLYDirectorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A46BA7A1E88C459004580D9 /* LLYDirectorVC.m */; };
 		0A46BA7D1E88C459004580D9 /* LLYDirectorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA7B1E88C459004580D9 /* LLYDirectorVC.xib */; };
-		0A46BA801E88C849004580D9 /* LYOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A46BA7F1E88C849004580D9 /* LYOpenGLView.m */; };
 		0A46BA871E8C90E2004580D9 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA851E8C90E2004580D9 /* Shader.fsh */; };
 		0A46BA881E8C90E2004580D9 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0A46BA861E8C90E2004580D9 /* Shader.vsh */; };
+		0A51BD7B1E994FE600BB02E4 /* AAPLEAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A51BD7A1E994FE600BB02E4 /* AAPLEAGLLayer.m */; };
 		0A5525F31E6E65CA008C709F /* NSMutableData+Buffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5525F21E6E65CA008C709F /* NSMutableData+Buffer.m */; };
 		0A5525F61E6E6733008C709F /* NSString+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5525F51E6E6733008C709F /* NSString+Url.m */; };
 		0A5525FF1E6EA764008C709F /* LLYRtmpConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A5525FE1E6EA764008C709F /* LLYRtmpConfig.m */; };
@@ -96,12 +96,12 @@
 		0A46BA791E88C459004580D9 /* LLYDirectorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYDirectorVC.h; path = ../LLYDirectorVC.h; sourceTree = "<group>"; };
 		0A46BA7A1E88C459004580D9 /* LLYDirectorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLYDirectorVC.m; path = ../LLYDirectorVC.m; sourceTree = "<group>"; };
 		0A46BA7B1E88C459004580D9 /* LLYDirectorVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LLYDirectorVC.xib; path = ../LLYDirectorVC.xib; sourceTree = "<group>"; };
-		0A46BA7E1E88C849004580D9 /* LYOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYOpenGLView.h; sourceTree = "<group>"; };
-		0A46BA7F1E88C849004580D9 /* LYOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYOpenGLView.m; sourceTree = "<group>"; };
 		0A46BA821E88E702004580D9 /* LLYPCHHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYPCHHeader.pch; path = LLYRtmpDemo/LLYPCHHeader.pch; sourceTree = "<group>"; };
 		0A46BA831E88E7EB004580D9 /* LLYDemoHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLYDemoHeader.h; sourceTree = "<group>"; };
 		0A46BA851E8C90E2004580D9 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		0A46BA861E8C90E2004580D9 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		0A51BD791E994FE600BB02E4 /* AAPLEAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLEAGLLayer.h; path = LLYRtmpDemo/AAPLEAGLLayer.h; sourceTree = "<group>"; };
+		0A51BD7A1E994FE600BB02E4 /* AAPLEAGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AAPLEAGLLayer.m; path = LLYRtmpDemo/AAPLEAGLLayer.m; sourceTree = "<group>"; };
 		0A5525F11E6E65CA008C709F /* NSMutableData+Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+Buffer.h"; sourceTree = "<group>"; };
 		0A5525F21E6E65CA008C709F /* NSMutableData+Buffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+Buffer.m"; sourceTree = "<group>"; };
 		0A5525F41E6E6733008C709F /* NSString+Url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Url.h"; sourceTree = "<group>"; };
@@ -205,6 +205,8 @@
 		0A6171161E666B3100A61D99 = {
 			isa = PBXGroup;
 			children = (
+				0A51BD791E994FE600BB02E4 /* AAPLEAGLLayer.h */,
+				0A51BD7A1E994FE600BB02E4 /* AAPLEAGLLayer.m */,
 				0A46BA831E88E7EB004580D9 /* LLYDemoHeader.h */,
 				0A46BA821E88E702004580D9 /* LLYPCHHeader.pch */,
 				0A46BA5A1E87EDC0004580D9 /* GPUImage.xcodeproj */,
@@ -250,8 +252,6 @@
 				0A46BA791E88C459004580D9 /* LLYDirectorVC.h */,
 				0A46BA7A1E88C459004580D9 /* LLYDirectorVC.m */,
 				0A46BA7B1E88C459004580D9 /* LLYDirectorVC.xib */,
-				0A46BA7E1E88C849004580D9 /* LYOpenGLView.h */,
-				0A46BA7F1E88C849004580D9 /* LYOpenGLView.m */,
 				0A6171851E68153100A61D99 /* LLYTypeHeader.h */,
 				0A46BA721E88C2B0004580D9 /* LLYAudienceVC.h */,
 				0A46BA731E88C2B0004580D9 /* LLYAudienceVC.m */,
@@ -529,13 +529,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A51BD7B1E994FE600BB02E4 /* AAPLEAGLLayer.m in Sources */,
 				0A6171841E680D2F00A61D99 /* LLYVideoPackager.m in Sources */,
 				0A6171661E666DF300A61D99 /* LLYVideoDecode.m in Sources */,
 				0A6171771E66A2F800A61D99 /* LLYRtmpSession.m in Sources */,
 				0A61717A1E66A31C00A61D99 /* LLYVideoSession.m in Sources */,
 				0A46BA751E88C2B0004580D9 /* LLYAudienceVC.m in Sources */,
 				0A46BA7C1E88C459004580D9 /* LLYDirectorVC.m in Sources */,
-				0A46BA801E88C849004580D9 /* LYOpenGLView.m in Sources */,
 				0A5525F31E6E65CA008C709F /* NSMutableData+Buffer.m in Sources */,
 				0A5525FF1E6EA764008C709F /* LLYRtmpConfig.m in Sources */,
 				0A6171731E66781600A61D99 /* LLYVideoOutputHandler.m in Sources */,
